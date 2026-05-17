@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<style>
+
+html, body {
+  height: 700px;
+  width: 560px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  display: grid;
+
+  grid-template-rows:
+    auto
+    1fr
+    auto;
+
+  height: 100vh;
+
+  background: #f4f4f4;
+}
+
+/* =======================
+   HEADER FIJO
+======================= */
+
+.header {
+  padding: 15px;
+  background: white;
+  border-bottom: 1px solid #ddd;
+  flex: 0 0 auto;
+  box-shadow: 0 2px 4px rgba(0,0,0,.05);
+  z-index: 10;
+}
+
+h3 {
+  margin: 0 0 10px;
+  font-size: 1.1em;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#zipName {
+  flex-grow: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btn-row {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-small {
+  flex: 1;
+  padding: 7px;
+  cursor: pointer;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: .85em;
+}
+
+.btn-small:hover {
+  background: #eee;
+}
+
+/* =======================
+   SOLO ESTA PARTE SCROLLEA
+======================= */
+
+#image-container {
+
+  height: 100%;
+
+  overflow-y: auto;
+
+  padding: 10px;
+
+  display: grid;
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 8px;
+
+  align-content: start;
+
+  box-sizing: border-box;
+}
+
+.img-wrapper {
+  position: relative;
+  height: 120px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #ddd;
+  transition: .15s;
+}
+
+.img-wrapper.selected {
+  border-color: #25D366;
+  opacity: 1;
+}
+
+.img-wrapper:not(.selected) {
+  opacity: .55;
+}
+
+.img-wrapper:hover {
+  transform: scale(1.02);
+}
+
+.img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.checkbox {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 18px;
+  height: 18px;
+}
+
+.no-images {
+  text-align: center;
+  padding: 30px;
+  color: #777;
+  grid-column: 1/-1;
+}
+
+/* =======================
+   FOOTER FIJO
+======================= */
+
+.footer {
+  padding: 15px;
+  background: white;
+  border-top: 1px solid #ddd;
+  flex: 0 0 auto;
+}
+
+#downloadBtn {
+  width: 100%;
+  padding: 12px;
+  background: #25D366;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#downloadBtn:hover {
+  background: #1fb85b;
+}
+
+#downloadBtn:disabled {
+  background: #ccc;
+}
+
+#statusMessage {
+  text-align: center;
+  margin-top: 5px;
+  font-size: .8em;
+  color: #666;
+  height: 15px;
+}
+
+/* scrollbar */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+  <h3>
+    WhatsApp Catalog Downloader
+  </h3>
+
+  <div class="input-group">
+
+    <input
+      type="text"
+      id="zipName"
+      placeholder="Nombre del archivo"
+    >
+
+    <span style="margin-left:5px">
+      .zip
+    </span>
+
+  </div>
+
+  <div class="btn-row">
+
+    <button
+      class="btn-small"
+      id="selectAll">
+
+      Seleccionar Todo
+    </button>
+
+    <button
+      class="btn-small"
+      id="deselectAll">
+
+      Cancelar Selección
+    </button>
+
+  </div>
+
+</div>
+
+<div id="image-container">
+
+  <div class="no-images">
+    Buscando imágenes...
+  </div>
+
+</div>
+
+<div class="footer">
+
+  <button id="downloadBtn">
+    Descargar ZIP
+  </button>
+
+  <div id="statusMessage"></div>
+
+</div>
+
+<script src="jszip.min.js"></script>
+<script src="popup.js"></script>
+
+</body>
+</html>

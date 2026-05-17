@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "WA Catalog Downloader",
+  "version": "1.0",
+  "description": "Descarga imágenes del catálogo de WhatsApp en ZIP",
+  "permissions": [
+    "activeTab",
+    "downloads",
+    "scripting",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://web.whatsapp.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "WA Downloader"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://web.whatsapp.com/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
